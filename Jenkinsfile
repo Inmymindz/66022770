@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        // สุ่มพอร์ตจากช่วง 1000-20000 และเก็บค่าในตัวแปร RANDOM_PORT
+        // กำหนดตัวแปร RANDOM_PORT เป็นว่างไว้
         RANDOM_PORT = ''
     }
     stages {
