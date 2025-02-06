@@ -29,33 +29,3 @@ pipeline {
         } 
     }
 }
-Updated playbooks/build.yaml:
-YAML
-- name: Build Docker Image
-  hosts: dockerservers
-  gather_facts: false
-  remote_user: root
-  tasks:
-    - name: Building Docker Image
-      docker_image:
-         name: 66022770:latest # docker image name
-         source: build
-         build:
-            path: /home/root/66022770 # path to source code
-         state: present
-         force_source: true
-Updated playbooks/deploy.yaml:
-YAML
-- name: Deploy Docker Container
-  hosts: dockerservers
-  gather_facts: false
-  remote_user: root
-  tasks:
-    - name: Creating the Container
-      docker_container:
-        name: 66022770-container
-        image: 66022770:latest
-        ports:
-          - "{{ port }}:80"  # ใช้ค่าพอร์ตที่ส่งจาก Jenkins
-        state: started
-        restart: true
