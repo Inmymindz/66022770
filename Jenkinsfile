@@ -1,6 +1,10 @@
 pipeline {
     agent any
-    stages {      
+    environment {
+        // สุ่มพอร์ตจากช่วง 1000-20000
+        RANDOM_PORT = sh(script: "shuf -i 1000-20000 -n 1", returnStdout: true).trim()
+    }
+    stages {
         stage("Copy file to Docker server") {
             steps {
                 // ใช้คำสั่ง SCP ส่งไฟล์จาก Jenkins ไปที่ Docker server
@@ -18,7 +22,9 @@ pipeline {
         stage("Create Docker Container") {
             steps {
                 // เรียกใช้ Ansible playbook สำหรับ Deploy Docker container
-                ansiblePlaybook playbook: '/var/lib/jenkins/workspace/660220770/playbooks/deploy.yaml'
+                // ใช้ RANDOM_PORT ที่สุ่มได้ในการตั้งค่า
+                ansiblePlaybook playbook: '/var/lib/jenkins/workspace/660220770/playbooks/deploy.yaml',
+                                  extraVars: [port: "${RANDOM_PORT}"]
             }    
         } 
     }
