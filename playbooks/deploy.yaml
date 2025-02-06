@@ -5,9 +5,9 @@
   tasks:
     - name: Creating the Container
       docker_container:
-         name: 66022770-container # docker container name
-         image: 66022770:latest # docker image name
-         ports:
-           - "{{ port }}:80" # กำหนดพอร์ตจาก Jenkins pipeline ที่จะใช้
-         state: started
-         restart: true
+        name: 66022770-container
+        image: 66022770:latest
+        ports:
+          - "{{ port }}:80"  # ใช้ค่าพอร์ตที่ส่งจาก Jenkins
+        state: started
+        restart: true
