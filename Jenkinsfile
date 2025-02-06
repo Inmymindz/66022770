@@ -8,7 +8,7 @@ pipeline {
         stage("Copy file to Docker server") {
             steps {
                 // ใช้คำสั่ง SCP ส่งไฟล์จาก Jenkins ไปที่ Docker server
-                sh "scp -r /var/lib/jenkins/workspace/660220770/* root@43.208.241.236:/home/root/660220770"
+                sh "scp -r /var/lib/jenkins/workspace/660220770/* root@43.208.253.87:/home/root/660220770"
             }
         }
         
